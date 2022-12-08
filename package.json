@@ -11,5 +11,8 @@
     "url": "https://github.com/eldoy/brregpro"
   },
   "author": "Vidar Eldøy <vidar@eldoy.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "soap": "^0.45.0"
+  }
 }
