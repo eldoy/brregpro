@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?><definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://grunndata.services.brreg.no" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="GrunndataService" targetNamespace="http://grunndata.services.brreg.no">
+  <types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://grunndata.services.brreg.no" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+  <xsd:import namespace="http://grunndata.services.brreg.no" schemaLocation="https://ws.brreg.no:443/grunndata-ws/GrunndataService?xsd=../xsd/grunndataservice.xsd"/>
+
+</xsd:schema>
+  </types>
+  <message name="hentHistoriskRegisterutskrift">
+    <part element="tns:hentHistoriskRegisterutskrift" name="parameters">
+    </part>
+  </message>
+  <message name="hentSaksopplysningerResponse">
+    <part element="tns:hentSaksopplysningerResponse" name="parameters">
+    </part>
+  </message>
+  <message name="hentHistoriskRegisterutskriftResponse">
+    <part element="tns:hentHistoriskRegisterutskriftResponse" name="parameters">
+    </part>
+  </message>
+  <message name="hentHistoriskRegisterutskriftMedFdato">
+    <part element="tns:hentHistoriskRegisterutskriftMedFdato" name="parameters">
+    </part>
+  </message>
+  <message name="hentHistoriskRegisterutskriftMedFdatoResponse">
+    <part element="tns:hentHistoriskRegisterutskriftMedFdatoResponse" name="parameters">
+    </part>
+  </message>
+  <message name="hentSaksopplysninger">
+    <part element="tns:hentSaksopplysninger" name="parameters">
+    </part>
+  </message>
+  <portType name="GrunndataServicePortType">
+    <operation name="hentHistoriskRegisterutskrift">
+      <input message="tns:hentHistoriskRegisterutskrift" wsam:Action="http://grunndata.services.brreg.no/GrunndataServicePortType/hentHistoriskRegisterutskriftRequest">
+    </input>
+      <output message="tns:hentHistoriskRegisterutskriftResponse" wsam:Action="http://grunndata.services.brreg.no/GrunndataServicePortType/hentHistoriskRegisterutskriftResponse">
+    </output>
+    </operation>
+    <operation name="hentSaksopplysninger">
+      <input message="tns:hentSaksopplysninger" wsam:Action="http://grunndata.services.brreg.no/GrunndataServicePortType/hentSaksopplysningerRequest">
+    </input>
+      <output message="tns:hentSaksopplysningerResponse" wsam:Action="http://grunndata.services.brreg.no/GrunndataServicePortType/hentSaksopplysningerResponse">
+    </output>
+    </operation>
+    <operation name="hentHistoriskRegisterutskriftMedFdato">
+      <input message="tns:hentHistoriskRegisterutskriftMedFdato" wsam:Action="http://grunndata.services.brreg.no/GrunndataServicePortType/hentHistoriskRegisterutskriftMedFdatoRequest">
+    </input>
+      <output message="tns:hentHistoriskRegisterutskriftMedFdatoResponse" wsam:Action="http://grunndata.services.brreg.no/GrunndataServicePortType/hentHistoriskRegisterutskriftMedFdatoResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="GrunndataServicePortTypePortBinding" type="tns:GrunndataServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="hentHistoriskRegisterutskrift">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="hentSaksopplysninger">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="hentHistoriskRegisterutskriftMedFdato">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="GrunndataService">
+    <port binding="tns:GrunndataServicePortTypePortBinding" name="GrunndataServicePortTypePort">
+      <soap:address location="https://ws.brreg.no:443/grunndata-ws/GrunndataService"/>
+    </port>
+  </service>
+</definitions>

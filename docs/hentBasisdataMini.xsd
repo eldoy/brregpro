@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) by XMLSpy 2008 Professional Ed. Release 2, Installed for 5 users (with SMP from 2008-09-22 to 2009-09-23) (Bronnoysundregistrene) -->
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by Stein Ivar Olsen (Bronnoysundregistrene) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="grunndata">
+		<xs:annotation>
+			<xs:documentation>Beskriver tjenesten hentBasisdataMini</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="responseHeader">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="orgnr" type="xs:int"/>
+							<xs:element name="hovedStatus" type="xs:int"/>
+							<xs:element name="underStatus">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="underStatusMelding" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute name="kode" type="xs:int" use="required"/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="prossessDato" type="xs:date" use="required"/>
+						<xs:attribute name="tjeneste" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="40"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="melding" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="organisasjonsnummer">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="registreringsDato" type="xs:date" use="required"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="navn">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="navn1">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="navn2" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="navn3" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="navn4" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="navn5" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="registreringsDato" type="xs:date" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="forretningsAdresse" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="adresse1" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="adresse2" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="adresse3" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="postnr" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="4"/>
+													<xs:maxLength value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="poststed">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="kommunenummer" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="4"/>
+													<xs:maxLength value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="kommune" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="landkode">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:length value="3"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="land">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="40"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="registreringsDato" type="xs:date" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="postAdresse" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="adresse1" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="adresse2" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="adresse3" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="postnr" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="4"/>
+													<xs:maxLength value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="poststed">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="kommunenummer" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="4"/>
+													<xs:maxLength value="9"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="kommune" minOccurs="0">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="35"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="landkode">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:length value="3"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="land">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="40"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="registreringsDato" type="xs:date" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="organisasjonsform" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="orgform">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="4"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="orgformBeskrivelse">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="1"/>
+													<xs:maxLength value="30"/>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="registreringsDato" type="xs:date" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="tjeneste" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="40"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

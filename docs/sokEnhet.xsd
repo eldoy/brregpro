@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Bronnoysundregistrene (Bronnoysundregistrene) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="BrSokeStreng" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Det organisasjonsnavnet det søkes på</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="OrgForm">
+		<xs:annotation>
+			<xs:documentation>En orgform i forkortet form (AS, BA, ASA osv)</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="MedUnderenheter" type="xs:boolean" default="false">
+		<xs:annotation>
+			<xs:documentation>Leverer underenheter (BEDR) hvis true</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ReturnerIngenHvisMax" type="xs:boolean" nillable="0">
+		<xs:annotation>
+			<xs:documentation>Returner inntil MaxTreffReturneres hvis FALSE(0), returner ingen hvis MaxTreffReturneres er overskredet og TRUE(1)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MaxTreffReturneres">
+		<xs:annotation>
+			<xs:documentation>Antall treff som max ønsket returnert - max er 1000</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+				<xs:maxInclusive value="1000"/>
+				<xs:minInclusive value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="OrgNavn">
+		<xs:annotation>
+			<xs:documentation>Fult navn på en organisasjon, max 175 tegn.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:maxLength value="175"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Orgnr">
+		<xs:annotation>
+			<xs:documentation>Et organisasjonsnummer</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+				<xs:minInclusive value="800000001"/>
+				<xs:maxInclusive value="999999999"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="RequestingIPAddr">
+		<xs:annotation>
+			<xs:documentation>IP-adressen til klienten som spør, på formatet nnn.nnn.nnn.nnn - ledende nuller skal være med</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:pattern value="\d\d\d\.\d\d\d\.\d\d\d\.\d\d\d"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Fylkesnr">
+		<xs:annotation>
+			<xs:documentation>Et fylkesnummer</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="2"/>
+				<xs:pattern value="[0-9]{2}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="Kommunenr">
+		<xs:annotation>
+			<xs:documentation>Et kommunenummer</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="4"/>
+				<xs:pattern value="[0-9]{4}"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="BrAixXmlRequest">
+		<xs:annotation>
+			<xs:documentation>Beskriver tjenesten sokEnhet - request</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element name="BrErfrSok">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="BrSokeStreng"/>
+							<xs:element ref="MaxTreffReturneres"/>
+							<xs:element ref="ReturnerIngenHvisMax"/>
+							<xs:element ref="RequestingIPAddr">
+								<xs:annotation>
+									<xs:documentation>IP-adressen til klienten som spør, på formatet nnn.nnn.nnn.nnn - ledende nuller skal være med</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="RequestingTjeneste">
+								<xs:annotation>
+									<xs:documentation>Den tjeneste svaret blir levert på. Her skal verdien være SOAP</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:maxLength value="5"/>
+										<xs:enumeration value="HTML"/>
+										<xs:enumeration value="XML"/>
+										<xs:enumeration value="SOAP"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element ref="Kommunenr" minOccurs="0"/>
+							<xs:element ref="Fylkesnr" minOccurs="0"/>
+							<xs:element ref="OrgForm" minOccurs="0"/>
+							<xs:element ref="MedUnderenheter" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:attribute name="RequestName" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="BrErfrSok"/>
+						<xs:enumeration value="BrEbrSok"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="grunndata">
+		<xs:annotation>
+			<xs:documentation>Beskriver tjenesten sokEnhet - response</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="responseHeader">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="hovedStatus" type="xs:int"/>
+							<xs:element name="underStatus">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="underStatusMelding" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute name="kode" type="xs:int" use="required"/>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="prossessDato" type="xs:date" use="required"/>
+						<xs:attribute name="tjeneste" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="40"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="melding" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="BrAixXmlResponse">
+								<xs:annotation>
+									<xs:documentation>Respons til en BrAixXmlRequest</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="BrAixResponseHeader">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ReturStatus">
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="0"/>
+																<xs:maxInclusive value="200"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="ReturStatusText" type="xs:string" minOccurs="0"/>
+													<xs:element name="TimeStamp" type="xs:dateTime">
+														<xs:annotation>
+															<xs:documentation>Tidspunktet da svaret ble generert gitt i lokal tid</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="ElapsedTime">
+														<xs:annotation>
+															<xs:documentation>Tiden transaksjonen (spørringen) tok gitt i millisek.</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:integer">
+																<xs:minInclusive value="0"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="AntallTreff">
+														<xs:simpleType>
+															<xs:restriction base="xs:nonNegativeInteger">
+																<xs:minInclusive value="0"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Sokeverdier" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element ref="BrSokeStreng"/>
+													<xs:element ref="OrgForm" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>En orgform i forkortet form (AS, BA, ASA osv)</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Fylke" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Navn på ev fylke som det er søk i</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:minLength value="1"/>
+																<xs:maxLength value="35"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element name="Kommune" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Navn på ev kommune det er søkt i</xs:documentation>
+														</xs:annotation>
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:minLength value="1"/>
+																<xs:maxLength value="35"/>
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+													<xs:element ref="MedUnderenheter" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation/>
+														</xs:annotation>
+													</xs:element>
+													<xs:element ref="MaxTreffReturneres"/>
+													<xs:element ref="ReturnerIngenHvisMax"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="BrErfrTreffliste" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="BrErfrTrefflisteElement" maxOccurs="1000">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element ref="Orgnr"/>
+																<xs:element ref="OrgNavn"/>
+																<xs:element name="Sted" type="xs:string">
+																	<xs:annotation>
+																		<xs:documentation>Inneholder setdsangivelse. Poststed med nr og navn hvis dette finnes eller land hvis det er et utenlansk foretak</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Score">
+																	<xs:annotation>
+																		<xs:documentation>Angir hvor godt navnet på organisasjonen matcher søkenavnet</xs:documentation>
+																	</xs:annotation>
+																	<xs:simpleType>
+																		<xs:restriction base="xs:integer">
+																			<xs:minInclusive value="0"/>
+																			<xs:maxInclusive value="100"/>
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:element>
+																<xs:element ref="OrgForm" minOccurs="0"/>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="Antall" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:integer">
+															<xs:minInclusive value="1"/>
+															<xs:maxInclusive value="1000"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="ResponseType" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="HeaderOnly"/>
+												<xs:enumeration value="BrErfrTreffliste"/>
+												<xs:enumeration value="BrEbrTreffliste"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="tjeneste" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:minLength value="1"/>
+									<xs:maxLength value="40"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
