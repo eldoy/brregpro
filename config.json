@@ -1,4 +1,4 @@
 {
-  "user": "usernumber",
-  "pw": "password"
+  "userid": "usernumber",
+  "password": "password"
 }

@@ -14,7 +14,7 @@ npm i brregpro
 const gateway = require('brregpro')
 
 // Init with credentials
-const brreg = gateway({ user: 'usernumber', pw: 'password' })
+const brreg = gateway({ userid: 'userid', password: 'password' })
 ```
 
 MIT Licensed. Enjoy!
