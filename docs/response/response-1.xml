@@ -1,0 +1,29 @@
+<grunndata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.brreg.no/grunndata/hentBasisdataMini.xsd">
+  <responseHeader prossessDato="2022-12-09" tjeneste="hentBasisdataMini">
+    <orgnr>992616091</orgnr>
+    <hovedStatus>0</hovedStatus>
+    <underStatus>
+      <underStatusMelding kode="0">Data returnert</underStatusMelding>
+      <underStatusMelding kode="1020">Enhet 992616091 har ikke postadresse</underStatusMelding>
+    </underStatus>
+  </responseHeader>
+  <melding tjeneste="hentBasisdataMini">
+    <organisasjonsnummer registreringsDato="2008-04-30">992616091</organisasjonsnummer>
+    <navn registreringsDato="2020-01-23">
+      <navn1>ELD&#xd8;Y PROJECTS</navn1>
+    </navn>
+    <forretningsAdresse registreringsDato="2020-01-23">
+      <adresse1>Maridalsveien 207</adresse1>
+      <postnr>0469</postnr>
+      <poststed>OSLO</poststed>
+      <kommunenummer>0301</kommunenummer>
+      <kommune>OSLO</kommune>
+      <landkode>NOR</landkode>
+      <land>Norge</land>
+    </forretningsAdresse>
+    <organisasjonsform registreringsDato="2008-04-30">
+      <orgform>ENK</orgform>
+      <orgformBeskrivelse>Enkeltpersonforetak</orgformBeskrivelse>
+    </organisasjonsform>
+  </melding>
+</grunndata>

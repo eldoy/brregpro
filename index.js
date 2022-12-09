@@ -1,12 +1,38 @@
 const path = require('path')
 const soap = require('soap')
+const xml2js = require('xml2js')
+const parser = new xml2js.Parser()
+
 const url = 'https://grunndata.brreg.no/grunndata/ErFr.wsdl'
 const config = require(path.join(process.cwd(), 'brreg.json'))
 
-const args = { ...config, orgnr: '992616091' }
+const query = { ...config, orgnr: '992616091' }
 
-soap.createClient(url, config, function (err, client) {
-  client.hentBasisdataMini(args, function (err, result) {
-    console.log(result)
+function fetch(url, query) {
+  return new Promise(function (resolve, reject) {
+    soap.createClient(url, {}, function (err, client) {
+      if (err) {
+        return reject(err)
+      }
+      client.hentBasisdataMini(query, function (err, data) {
+        if (err) {
+          return reject(err)
+        }
+        resolve(data.return)
+      })
+    })
   })
-})
+}
+
+async function brregpro() {
+  let data = await fetch(url, query)
+
+  console.log(data)
+
+  console.log(data)
+
+  const json = await parser.parseStringPromise(data)
+  console.log(json)
+}
+
+brregpro()

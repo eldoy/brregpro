@@ -13,6 +13,7 @@
   "author": "Vidar Eldøy <vidar@eldoy.com>",
   "license": "MIT",
   "dependencies": {
-    "soap": "^0.45.0"
+    "soap": "^0.45.0",
+    "xml2js": "^0.4.23"
   }
 }
