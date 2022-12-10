@@ -1,10 +1,14 @@
-const path = require('path')
 const soap = require('soap')
 const xml2js = require('xml2js')
-const parser = new xml2js.Parser()
+const parser = new xml2js.Parser({
+  ignoreAttrs: true,
+  explicitArray: false,
+  includeWhiteChars: true,
+  trim: true
+})
 const services = require('./lib/services.js')
 
-function brregpro(config = {}) {
+module.exports = function brregpro(config = {}) {
   function fetch(uri, query) {
     const [name, endpoint] = uri.split('/')
     console.log({ name, endpoint })
@@ -43,14 +47,3 @@ function brregpro(config = {}) {
 
   return { fetch }
 }
-
-async function run() {
-  const config = require(path.join(process.cwd(), 'brreg.json'))
-  const brreg = brregpro(config)
-  const result = await brreg.fetch('enhet/hentBasisdataMini', {
-    orgnr: '992616091'
-  })
-  console.log(JSON.stringify(result, null, 2))
-}
-
-run()

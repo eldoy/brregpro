@@ -4,7 +4,7 @@
   "description": "Fetch data from paid web services at the Norwegian company registry",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'no test runner installed'"
+    "test": "nodemon tests/run.js"
   },
   "repository": {
     "type": "git",
