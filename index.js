@@ -8,17 +8,25 @@ const parser = new xml2js.Parser({
 })
 const services = require('./lib/services.js')
 
+const DEBUG = process.env.NODE_ENV != 'production'
+
+function log(...args) {
+  if (DEBUG) {
+    console.info(...args)
+  }
+}
+
 module.exports = function brregpro(config = {}) {
   function fetch(uri, query) {
     const [name, endpoint] = uri.split('/')
-    console.log({ name, endpoint })
+    log({ name, endpoint })
     const { url } = services[name]
 
-    console.log({ url })
+    log({ url })
 
     query = { ...config, ...query }
 
-    console.log(query)
+    log(query)
 
     return new Promise(function (resolve, reject) {
       soap.createClient(url, {}, function (err, client) {
@@ -26,12 +34,12 @@ module.exports = function brregpro(config = {}) {
           return reject(err)
         }
         const desc = client.describe()
-        console.log(JSON.stringify(desc, null, 2))
+        log(JSON.stringify(desc, null, 2))
         client[endpoint](query, function (err, data) {
           if (err) {
             return reject(err)
           }
-          console.log(data.return)
+          log(data.return)
           parser
             .parseStringPromise(data.return)
             .then(function (json) {
