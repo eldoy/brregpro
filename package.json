@@ -4,7 +4,7 @@
   "description": "Fetch data from paid web services at the Norwegian company registry",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon tests/run.js"
+    "test": "nodemon test/run.js"
   },
   "repository": {
     "type": "git",
