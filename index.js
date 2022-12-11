@@ -19,27 +19,19 @@ function log(...args) {
 module.exports = function brregpro(config = {}) {
   function fetch(uri, query) {
     const [name, endpoint] = uri.split('/')
-    log({ name, endpoint })
     const { url } = services[name]
-
-    log({ url })
-
     query = { ...config, ...query }
-
-    log(query)
-
     return new Promise(function (resolve, reject) {
       soap.createClient(url, {}, function (err, client) {
         if (err) {
           return reject(err)
         }
-        const desc = client.describe()
-        log(JSON.stringify(desc, null, 2))
+        // Uncomment to see all end points
+        // const desc = client.describe()
         client[endpoint](query, function (err, data) {
           if (err) {
             return reject(err)
           }
-          log(data.return)
           parser
             .parseStringPromise(data.return)
             .then(function (json) {
